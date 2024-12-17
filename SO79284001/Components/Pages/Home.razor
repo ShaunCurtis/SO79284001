@@ -1,0 +1,28 @@
+﻿@page "/"
+@page "/Servers"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ul>
+    @foreach (var server in servers)
+    {
+        <li>
+            @server.Name in @server.City is
+            <span style="color:@((server.IsOnline ? "Green" : "Red"))">
+                @(server.IsOnline ? "Online" : "Offline")
+                <a href="/server/@server.ServerId" class="btn btn-link">Edit</a>
+            </span>
+        </li>
+    }
+</ul>
+
+@code {
+    List<Server> servers = new() { 
+        new() { ServerId = 1, City="London", IsOnline = true, Name="Server-1" }, 
+        new() { ServerId = 2, City="Paris", IsOnline = true, Name="Server-2" }
+    };
+}

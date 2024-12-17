@@ -1,0 +1,38 @@
+﻿@page "/server/{id:int}"
+
+@inject NavigationManager NavigationManager;
+
+
+<h3>Edit Server</h3>
+
+@if (server != null)
+{
+    <EditForm Model=server FormName="formServer" OnValidSubmit="Submit">
+        <span>Hello</span>
+        <div class="text-end m-2">
+            <button class="btn btn-primary" typeof="submit">Update</button>
+            <a href="/servers" class="btn btn-primary">Close</a>
+        </div>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter] public int id { get; set; }
+
+    private Server? server { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Fake get a record
+        server = new() { ServerId = 1, City = "London", IsOnline = true, Name = "Server-1" };
+        await Task.Delay(100);
+    }
+    private async void Submit()
+    {
+        // Fake save a record
+        await Task.Delay(100);
+
+        NavigationManager.NavigateTo("/servers");
+    }
+}
